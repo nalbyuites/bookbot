@@ -1,16 +1,21 @@
+import sys
 from stats import *
 
 def main():
-    num_words = get_num_words("books/frankenstein.txt")
-    occurence_count_of_characters = get_occurence_count_of_characters("books/frankenstein.txt")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
-    print(f"============ BOOKBOT ============")
-    print(f"Analyzing book found at books/frankenstein.txt...")
-    print(f"----------- Word Count ----------")
+    num_words = get_num_words(sys.argv[1])
+    occurence_count_of_characters = get_occurence_count_of_characters(sys.argv[1])
+
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {sys.argv[1]}...")
+    print("----------- Word Count ----------")
     print(f"Found {num_words} total words")
-    print(f"--------- Character Count -------")
+    print("--------- Character Count -------")
     for char_dict in get_sorted_occurence_count_of_characters(occurence_count_of_characters):
         print(f'{char_dict["char"]}: {char_dict["num"]}')
-    print(f"============= END ===============")
+    print("============= END ===============")
 
 main()
